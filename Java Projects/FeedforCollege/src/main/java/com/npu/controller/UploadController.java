@@ -1,7 +1,11 @@
 package com.npu.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.npu.dao.UserDAO;
 import com.npu.pojo.FileUpload;
-
+import com.npu.pojo.RegisteredUser;
 
 @Controller
 public class UploadController {
@@ -23,18 +27,17 @@ public class UploadController {
 	public String uploadPic(@RequestParam("fileabc") MultipartFile mfile,Model model, @ModelAttribute("fileObj") FileUpload file, HttpServletRequest request,BindingResult result, HttpServletResponse response)
 	{
 		
-		//String ext = FilenameUtils.getExtension((file.getFile()).getOriginalFilename());
-		//	String name = old.getFirstName()+"_"+System.currentTimeMillis()*r+"_pic."+ext;
-			//old.setProfilepicName(name);
-			
-			UserDAO userdao = new UserDAO();
-			boolean flag = userdao.uploadImage(file);
-			
-		/*try{
-		System.out.println("Inside");
-		String returnPage = "UserProfile";
-		if(!file.getFile().isEmpty())
+		String returnPage = "home";
+		UserDAO userdao = new UserDAO();
+		
+		if(!file.getFileabc().isEmpty())
 		{
+		Random rand = new Random();
+		int r = rand.nextInt(10);
+		
+		System.out.println("in file upload");
+		RegisteredUser old = (RegisteredUser) request.getSession().getAttribute("user");
+		//MultipartFile photo = user.getProfilepic();
 		if (result.hasErrors())
 		{
 		//--- errors detected ---//
@@ -42,19 +45,19 @@ public class UploadController {
 		else {
 			try {
 				//-- old.setProfilepic(photo); 
-				String ext = FilenameUtils.getExtension((file.getFile()).getOriginalFilename());
-			//	String name = old.getFirstName()+"_"+System.currentTimeMillis()*r+"_pic."+ext;
-				//old.setProfilepicName(name);
-				
-				UserDAO userdao = new UserDAO();
-				boolean flag = userdao.uploadImage(file);
-				//boolean flag = userDao.uploadImage(old,file,name);		
+				String ext = FilenameUtils.getExtension((file.getFileabc()).getOriginalFilename());
+				String name = old.getFirstName()+"_"+System.currentTimeMillis()*r+"_pic."+ext;
+				old.setProfilepicName(name);
+				boolean flag = userdao.uploadImage(old,file,name);
+				request.getSession().setAttribute("user", old);
+				// Abhi comment
+				// boolean flag = userDao.uploadImage(old,file,name);		
 				System.out.println("the img store flag is "+flag);
 				if (flag) {
 					model.addAttribute("message",
 							"Your profile has been updated successfully");
 					model.addAttribute("task", "success");
-					//request.getSession().setAttribute("user",old);
+					request.getSession().setAttribute("user",old);
 
 				} 
 				else {
@@ -78,12 +81,8 @@ public class UploadController {
 			System.out.println("file empty");
 		}
 		model.addAttribute("fileObj", new FileUpload());
-		return returnPage;
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-			return "home";
-		}*/
+		
 		return "home";
-	}
-	
+
+	}	
 }

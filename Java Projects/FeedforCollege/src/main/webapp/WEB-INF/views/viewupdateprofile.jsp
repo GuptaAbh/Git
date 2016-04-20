@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@include file="menu.jsp"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@include file="menu.jsp" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,25 +10,11 @@
 </head>
 <body>
 
-	<c:out value="${sessionScope.user.firstName}"></c:out>
-	<img class="img-circle" alt="140x140"
+
+<img class="img-circle" alt="140x140"
 		style="width: 150px; height: 150px;"
 		src="<c:url value="/images/${sessionScope.user.profilepicName }"/>"
 		data-holder-rendered="true">
-		<br/>
-	<form:form class="form-group" action="picpic" method="post"
-		modelAttribute="fileObj" enctype="multipart/form-data">
-
-		<tr>
-			<td><div>
-					<label>Change Profile Photo(Max 5MB): </label>
-					<form:input path="fileabc" name="fileabc" type="file" /></td>
-		</tr>
-		<div>
-			<input style="padding-right: 10px;" id="bigbutton" type="submit"
-				value="Upload" /> <br> <br>
-		</div>
-	</form:form>
 </body>
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">

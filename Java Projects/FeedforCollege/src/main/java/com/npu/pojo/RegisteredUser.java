@@ -25,6 +25,21 @@ public class RegisteredUser {
 	@Column(name="collegename")
 	private String collegename;
 	
+	@Column(name="profilepicName")
+	private String profilepicName;
+	
+	
+	
+	public String getProfilepicName() {
+		return profilepicName;
+	}
+
+
+	public void setProfilepicName(String profilepicName) {
+		this.profilepicName = profilepicName;
+	}
+
+
 	@OneToOne
 	@JoinColumn(name="file_fk")
 	private FileUpload file;
@@ -48,6 +63,23 @@ public class RegisteredUser {
 	}
 	
 	
+	public FileUpload getFile() {
+		return file;
+	}
+
+	public void setFile(FileUpload file) {
+		this.file = file;
+	}
+
+	public Set<Feeds> getFeedList() {
+		return feedList;
+	}
+
+	public void setFeedList(Set<Feeds> feedList) {
+		this.feedList = feedList;
+	}
+
+
 	@Column(name="password")
 	private String password;
 	

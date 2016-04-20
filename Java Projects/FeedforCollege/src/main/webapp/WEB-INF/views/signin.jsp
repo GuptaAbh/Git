@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@include file="menu.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,13 +16,13 @@
 				<label class="col-md-4 control-label" for="fname">User Name</label>
 				<div class="col-md-4">
 					<input type="text" name="userName" id="userName" placeholder="User Name"
-						class="form-control" />
+						class="form-control" required=/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="fname">Password</label>
 				<div class="col-md-4">
-					<input type="text" name="password" id="password" placeholder="Password"
+					<input type="text" required name="password" id="password" placeholder="Password"
 						class="form-control" />
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@include file="menu.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="myApp">
@@ -13,12 +14,12 @@
 
 
 	<form:form class="form-horizontal" modelAttribute="registereduser"
-		method="post" action="registeruser">
-		<legand align="center">Registration Form</legand>
+		method="post" action="registeruser" enctype="multipart/form-data">
+		<legand >Registration Form</legand>
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="fname">First Name</label>
 			<div class="col-md-4">
-				<form:input type="text" id="firstName" placeholder="First Name"
+				<form:input  type="text" id="firstName" placeholder="First Name"
 					path="firstName" class="form-control" />
 			</div>
 		</div>
@@ -26,7 +27,7 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="lname">Last Name</label>
 			<div class="col-md-4">
-				<form:input type="text" id="laseName" placeholder="Last Name"
+				<form:input  type="text" id="laseName" placeholder="Last Name"
 					path="lastName" class="form-control" />
 			</div>
 		</div>
@@ -35,16 +36,18 @@
 			<label class="col-md-4 control-label" for="username">User
 				Name</label>
 			<div class="col-md-4">
-				<form:input type="text" id="firstName" placeholder="User Name"
-					path="userName" class="form-control" />
+				<form:input  type="text" id="firstName" placeholder="User Name"
+					ng-model="username" ng-change="searchusername()" 
+					path="userName" class="form-control" /><span ng-style="usernameStyle">{{UserSpan}}</span>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="email">Email</label>
 			<div class="col-md-4">
-				<form:input type="text" id="email" placeholder="Email Addresss"
-					path="email" class="form-control" />
+				<form:input  type="text" id="email" placeholder="Email Addresss"
+					ng-model="email" ng-change="searchemail()" 
+					path="email" class="form-control" /><span ng-style="emailnameStyle">{{emailSpan}}</span>
 			</div>
 		</div>
 		<div class="form-group">
@@ -92,7 +95,7 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="name">Password</label>
 			<div class="col-md-4">
-				<form:input type="text" id="password" placeholder="Password"
+				<form:input  type="text" id="password" placeholder="Password"
 					path="password" class="form-control" />
 			</div>
 		</div>
@@ -102,7 +105,7 @@
 			<label class="col-md-4 control-label" for="name">Confirm
 				Password</label>
 			<div class="col-md-4">
-				<form:input type="text" id="firstName"
+				<form:input  type="text" id="firstName"
 					placeholder="Confirm Password" path="confirmPassword"
 					class="form-control" />
 			</div>
@@ -130,6 +133,41 @@
 				}).error(function(data, status, header, config) {
 			$scope.ResponseDetails = "Data: " + data;
 		});
+		
+		$scope.searchusername = function() {
+	    	 $http.get('chkusername', {params:{"username": $scope.username}}).success(function (data, status, headers, config,response) {
+	             if(data.avail==true){
+	            	 $scope.usernameStyle={'background-color':'blue'};
+	            	 $scope.UserSpan = "User name Available";
+	             }else{
+	            	 $scope.usernameStyle={'background-color':'red'};
+	            	 $scope.UserSpan = "User name not Available";
+	             }
+	         })
+	    .error(function (data, status, header, config) {
+	    	alert('getfail');
+	        $scope.ResponseDetails = "Data: " + data;
+	    });
+	    };
+		
+	    $scope.searchemail = function() {
+
+	    	 $http.get('chkemail', {params:{"email": $scope.email}}).success(function (data, status, headers, config,response) {
+	    		 if(data.avail==true){
+	            	 $scope.emailStyle={'background-color':'blue'};
+	            	 $scope.emailSpan = "Email Available";
+	             }else{
+	            	 $scope.emailStyle={'background-color':'red'};
+	            	 $scope.emailSpan = "Email not Available";
+	             }
+	         })
+	    .error(function (data, status, header, config) {
+	    	alert('getfail');
+	        $scope.ResponseDetails = "Data: " + data;
+	    });
+	    };
+
+		
 	});
 </script>
 </html>

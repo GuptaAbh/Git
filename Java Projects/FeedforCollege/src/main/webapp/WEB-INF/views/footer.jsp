@@ -1,12 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<link src="<c:url value="src/main/webapp" />" rel="stylesheet"/>
+<script ></script>
+<footer>
+    <div class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 ">
+                    <h3> Find us at</h3>
+                    <ul class="social">
+                        <li> <a href="#"> <i class=" fa fa-facebook">FaceBook   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-twitter">Twitter   </i> </a> </li>
+                        <li> <a href="#"> <i class="fa fa-google-plus">Google-Plus   </i> </a> </li>
+                    </ul>
+                </div>
+            </div>
+            <!--/.row--> 
+        </div>
+        <!--/.container--> 
+    </div>
+    <!--/.footer-->
+    
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="pull-left"> Copyright © Bloom. All right reserved. </p>
+        </div>
+    </div>
+    <!--/.footer-bottom--> 
+</footer>

@@ -6,7 +6,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +40,17 @@ public class HomeController {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
 		String formattedDate = dateFormat.format(date);
 		FeedDAO feed = new FeedDAO();
 		feed.getallFeed();
 		model.addAttribute("serverTime", formattedDate );
-		
 		return "home";
+	}
+	
+	@RequestMapping(value="/footer", method=RequestMethod.GET)
+	public String footer(Model model){
+		
+		return "footer";
 	}
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signup(Model model){
@@ -52,11 +58,27 @@ public class HomeController {
 		return "signup";
 	}
 	
+	@RequestMapping(value="/viewupdateprofile", method=RequestMethod.GET)
+	public String viewupdateprofile(Model model){
+		return "viewupdateprofile";
+	}
+	
+	
+	
 	@RequestMapping(value="/signin", method=RequestMethod.GET)
 	public String signin(Model model,HttpServletResponse response) throws IOException{
 		
 		return "signin";
 	}
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(Model model,HttpServletResponse response,HttpServletRequest request) throws IOException{
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("user",null);
+		return "home";
+	}
+	
+	
 	
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String home(Model model){
@@ -65,7 +87,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/uploadprofilepic", method=RequestMethod.GET)
 	public String uploadprofilepic(Locale locale,Model model){
-		
 		FileUpload fu = new FileUpload();
 		System.out.println(" Home "+fu.getFileabc());
 		model.addAttribute("fileObj", fu);
