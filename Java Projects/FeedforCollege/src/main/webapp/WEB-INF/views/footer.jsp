@@ -21,7 +21,7 @@
     
     <div class="footer-bottom">
         <div class="container">
-            <p class="pull-left"> Copyright © Bloom. All right reserved. </p>
+            <p class="pull-left"> Copyright © Gupta.Abh All right reserved. </p>
         </div>
     </div>
     <!--/.footer-bottom--> 

@@ -59,11 +59,24 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/viewupdateprofile", method=RequestMethod.GET)
-	public String viewupdateprofile(Model model){
+	public String viewupdateprofile(Model model,HttpServletRequest request){
+		HttpSession session = request.getSession();
+		RegisteredUser user  = (RegisteredUser)session.getAttribute("user");
+		model.addAttribute("registereduser", user);
+		
+		if(user.getFile()!=null){
+		model.addAttribute("fileObj", user.getFile());}
+		else{
+			model.addAttribute("fileObj", new FileUpload());
+		}
 		return "viewupdateprofile";
 	}
 	
 	
+	@RequestMapping(value="/adminhome", method=RequestMethod.GET)
+	public String adminhome(Model model){
+		return "adminhome";
+	}
 	
 	@RequestMapping(value="/signin", method=RequestMethod.GET)
 	public String signin(Model model,HttpServletResponse response) throws IOException{
