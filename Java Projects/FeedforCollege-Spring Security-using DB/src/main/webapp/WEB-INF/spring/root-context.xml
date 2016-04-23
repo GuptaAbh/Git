@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="feedDao" class="com.npu.dao.FeedDAO"></bean>
+	<bean id="collegeDao" class="com.npu.dao.CollegeDAO"></bean>
+	<bean id="userDao" class="com.npu.dao.UserDAO"></bean>
+	
+	<bean id="dataSource" name="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/feedforcollege">
+		</property>
+	</bean>
+
+
+</beans>
